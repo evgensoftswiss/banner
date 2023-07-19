@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<style>
+			.banner {
+				--clicked: 0;
+
+				position: relative;
+				border-radius: 14px;
+				width: 416px;
+				height: 230px;
+				background-position: calc(352px * (var(--clicked) - 1)) 0;
+				background-repeat: no-repeat;
+				overflow: hidden;
+			}
+			.content1, .content2 {
+				position: absolute;
+				margin: 24px 0;
+				left: 24px;
+			}
+			.banner, .content1, .button_info, .content2, .button_close {
+				transition: all 0.8s;
+				transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+			}
+			.content1, .button_info {
+				opacity: calc(1 - var(--clicked));
+			}
+			.content2, .button_close {
+				opacity: var(--clicked);
+			}
+			.content1 {
+				scale: calc(1 - var(--clicked) * 0.5);
+				left: calc(var(--clicked) * 352px /2 + 24px);
+			}
+			.content2 {
+				scale: calc(2 - var(--clicked));
+				left: calc((var(--clicked) - 1) * 352px + 24px);
+			}
+			.button_info, .button_close {
+				position: absolute;
+				top: 16px;
+				right: 16px;
+				width: 32px;
+				height: 32px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="banner" class="banner" style="background-image: url('bg.png');">
+			<div class="banner-1">
+				<div class="content1"><img src="content1.svg" /></div>
+				<div class="button_info"><img src="b_info.svg" onclick="banner_click()" /></div>
+			</div>
+			<div class="banner-2">
+				<div class="content2"><img src="content2.svg" /></div>
+				<div class="button_close"><img src="b_close.svg" onclick="banner_click()" /></div>
+			</div>
+		</div>
+
+		<script>
+			var r = document.getElementById("banner");
+			function banner_click() {
+				if (r.style.getPropertyValue('--clicked') != '1') {
+					r.style.setProperty('--clicked', '1');
+				} else {
+					r.style.setProperty('--clicked', '0');
+				}
+			}
+		</script>
+
+	</body>
+</html>
